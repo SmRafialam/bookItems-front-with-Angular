@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,7 @@ import { RouterLink } from '@angular/router';
 export class RegisterComponent implements OnInit{
   registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder, private authService:AuthService, private router: Router){
 
   }
 
@@ -24,8 +25,19 @@ export class RegisterComponent implements OnInit{
     })
   }
 
-  onsubmit(){
+  onsubmitRegister(){
     console.log(this.registerForm.value);
+    if (this.registerForm.valid) {
+      this.authService.register(this.registerForm.value).subscribe(
+        (response: any) => {
+          console.log('Registration successful', response);
+          this.router.navigate(['/login']); // Redirect to login after registration
+        },
+        (error) => {
+          console.error('Registration failed', error);
+        }
+      );
+    }
   }
 
 }

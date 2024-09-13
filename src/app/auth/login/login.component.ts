@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { RouterLink } from '@angular/router';
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder, private authService:AuthService, private router:Router){
 
   }
 
@@ -23,9 +24,20 @@ export class LoginComponent implements OnInit{
     });
   }
 
-  onSubmit(){
-    console.log(this.loginForm.value);
-    
+  onSubmitLogin(){
+    if (this.loginForm.valid) {
+      console.log(this.loginForm.value);
+
+      this.authService.login(this.loginForm.value).subscribe(
+        (res: any) => {
+          console.log('Login successful', res);
+          this.router.navigate(['/book-lists']); 
+        },
+        (error) => {
+          console.error('Login failed', error);
+        }
+      );
+    }
   }
 
 }
