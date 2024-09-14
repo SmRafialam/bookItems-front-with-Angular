@@ -1,0 +1,22 @@
+<div class="container d-flex justify-content-center">
+    <h2><b>Add your Book Lists here!</b></h2>
+</div>
+<form class="m-5" [formGroup]="booksForm" (ngSubmit)="onSubmitBookList()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" formControlName="title" id="title">
+    </div>
+    <div class="mb-3">
+      <label for="content" class="form-label">Content</label>
+      <input type="textarea" style="height: 150px;" class="form-control" id="content" formControlName="content">
+    </div>
+    <div class="mb-3">
+      <label for="author" class="form-label">Author</label>
+      <input type="text" class="form-control" id="author" formControlName="author">
+    </div>
+    <div class="mb-3">
+      <label for="author" class="form-label">Price</label>
+      <input type="text" class="form-control" id="price" formControlName="price">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
