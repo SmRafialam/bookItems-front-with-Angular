@@ -26,15 +26,15 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register`, payload);
   }
 
-  logout(): void {
-    localStorage.removeItem('token');
-  }
+  // logout(): void {
+  //   localStorage.removeItem('token');
+  // }
   
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('token'); 
-  }
+  // isLoggedIn(): boolean {
+  //   return !!localStorage.getItem('token'); 
+  // }
   
-  getToken(): string | null {
-    return localStorage.getItem('token');
-  }
+  // getToken(): string | null {
+  //   return localStorage.getItem('token');
+  // }
 }

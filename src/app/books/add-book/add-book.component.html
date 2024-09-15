@@ -5,18 +5,30 @@
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
       <input type="text" class="form-control" formControlName="title" id="title">
+      <div *ngIf="booksForm.get('title')?.invalid && booksForm.get('title')?.touched" class="text-danger">
+        <small *ngIf="booksForm.get('title')?.errors?.['required']">Title is required.</small>
+      </div>
     </div>
     <div class="mb-3">
       <label for="content" class="form-label">Content</label>
       <input type="textarea" style="height: 150px;" class="form-control" id="content" formControlName="content">
+      <div *ngIf="booksForm.get('content')?.invalid && booksForm.get('content')?.touched" class="text-danger">
+        <small *ngIf="booksForm.get('content')?.errors?.['required']">Content is required.</small>
+      </div>
     </div>
     <div class="mb-3">
       <label for="author" class="form-label">Author</label>
       <input type="text" class="form-control" id="author" formControlName="author">
+      <div *ngIf="booksForm.get('author')?.invalid && booksForm.get('author')?.touched" class="text-danger">
+        <small *ngIf="booksForm.get('author')?.errors?.['required']">Author is required.</small>
+      </div>
     </div>
     <div class="mb-3">
       <label for="author" class="form-label">Price</label>
       <input type="text" class="form-control" id="price" formControlName="price">
+      <div *ngIf="booksForm.get('price')?.invalid && booksForm.get('price')?.touched" class="text-danger">
+        <small *ngIf="booksForm.get('price')?.errors?.['required']">Price is required.</small>
+      </div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

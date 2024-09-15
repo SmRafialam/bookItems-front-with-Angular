@@ -5,4 +5,8 @@ export interface Book {
     price: string;
     createdAt?: Date;
 }
-  
+
+export interface PaginatedBooks {
+    items: Book[];
+    total: number;
+  }

@@ -1,29 +1,42 @@
-<h2 class="text-center">Book Lists</h2>
-<div>
+<div class="container">
+    <h2 class="text-center">Book Lists</h2>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
     
+    <div *ngIf="isLoading" class="text-center m-5">
+      <p>Loading book lists...</p>
+    </div>
+    
+    <table *ngIf="!isLoading && !errorMessage" class="m-5 table table-success table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Content</th>
+            <th scope="col">Author</th>
+            <th scope="col">Price</th>
+            <th scope="col">Created_At</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="(bookLists | searchfilter: searchTerm : 'title').length === 0">
+            <td colspan="6" class="text-center">No items found</td>
+          </tr>
+          
+          <tr *ngFor="let book of bookLists | searchfilter : searchTerm : 'title' | paginate: { itemsPerPage: 5, currentPage: p }">
+            <th scope="row">{{book.title}}</th>
+            <td>{{book.content}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.price}}</td>
+            <td>{{book.createdAt}}</td>
+            <td>
+              <button class="btn btn-primary btn-sm m-2" (click)="onEdit(book._id)">Edit</button>
+              <button class="btn btn-danger btn-sm" (click)="onDelete(book._id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </nav>
 </div>
-<table class="m-5 table table-success table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Title</th>
-        <th scope="col">Content</th>
-        <th scope="col">Author</th>
-        <th scope="col">Price</th>
-        <th scope="col">Created_At</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let book of bookLists">
-        <th scope="row">{{book.title}}</th>
-        <td>{{book.content}}</td>
-        <td>{{book.author}}</td>
-        <td>{{book.price}}</td>
-        <td>{{book.createdAt}}</td>
-        <td>
-          <button class="btn btn-primary btn-sm m-2" (click)="onEdit(book._id)">Edit</button>
-          <button class="btn btn-danger btn-sm" (click)="onDelete(book._id)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-</table>
