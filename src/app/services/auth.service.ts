@@ -26,6 +26,10 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register`, payload);
   }
 
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token'); 
+  }
+
   // logout(): void {
   //   localStorage.removeItem('token');
   // }
