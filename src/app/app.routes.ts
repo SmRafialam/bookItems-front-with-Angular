@@ -26,7 +26,8 @@ export const routes: Routes = [
     },
     { 
         path: 'add-book', 
-        component: AddBookComponent
+        component: AddBookComponent,
+        canActivate: [AuthGuard]
     },
     { 
         path: 'edit-book/:id', 
